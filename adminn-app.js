@@ -32,7 +32,74 @@ class ErrorBoundary extends React.Component {
     }
 }
 
+function AdminLogin({ onLogin }) {
+    const [pin, setPin] = React.useState('');
+    const [error, setError] = React.useState('');
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (pin === '1417') {
+            sessionStorage.setItem('admin_pin', '1417');
+            onLogin();
+        } else {
+            setError('رمز PIN غير صحيح! حاول مرة أخرى.');
+            setPin('');
+        }
+    };
+    
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-emerald-950 to-gray-900 flex items-center justify-center p-4">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-ios text-center max-w-sm w-full space-y-6">
+                <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
+                    <div className="icon-shield text-white text-3xl animate-pulse"></div>
+                </div>
+                <div className="space-y-2">
+                    <h1 className="text-xl font-bold text-white">بديلي | إدارة المنصة</h1>
+                    <p className="text-xs text-white/60">هذه المنطقة محمية ومخصصة للإدارة فقط</p>
+                </div>
+                
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                        <label className="block text-xs font-semibold text-white/80 text-right mr-1">رمز الدخول (PIN)</label>
+                        <input 
+                            type="password"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            maxLength="4"
+                            placeholder="••••"
+                            value={pin}
+                            onChange={(e) => {
+                                setError('');
+                                setPin(e.target.value.replace(/\D/g, ''));
+                            }}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-center text-xl text-white font-bold tracking-widest focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 placeholder-white/30 transition-all"
+                            autoFocus
+                        />
+                    </div>
+                    
+                    {error && (
+                        <p className="text-xs text-red-300 font-semibold bg-red-500/10 py-2.5 rounded-xl border border-red-500/20 text-center">
+                            {error}
+                        </p>
+                    )}
+                    
+                    <Button type="submit" className="w-full py-3.5 bg-primary hover:bg-primary-dark text-white rounded-xl shadow-md transition-all font-semibold flex items-center justify-center gap-2 border-0">
+                        <div className="icon-lock text-sm"></div>
+                        إلغاء القفل والدخول
+                    </Button>
+                </form>
+                <a href="index.html" className="inline-block text-xs text-white/40 hover:text-white/60 transition-colors">
+                    &larr; العودة للمنصة
+                </a>
+            </div>
+        </div>
+    );
+}
+
 function AdminDashboard() {
+    const [isAuthenticated, setIsAuthenticated] = React.useState(
+        sessionStorage.getItem('admin_pin') === '1417'
+    );
     const [requests, setRequests] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [stats, setStats] = React.useState({
@@ -42,8 +109,10 @@ function AdminDashboard() {
     });
 
     React.useEffect(() => {
-        fetchRequests();
-    }, []);
+        if (isAuthenticated) {
+            fetchRequests();
+        }
+    }, [isAuthenticated]);
 
     const fetchRequests = async () => {
         try {
@@ -97,6 +166,10 @@ function AdminDashboard() {
             alert("فشل الحذف");
         }
     };
+
+    if (!isAuthenticated) {
+        return <AdminLogin onLogin={() => setIsAuthenticated(true)} />;
+    }
 
     return (
         <div className="min-h-screen pb-12">
