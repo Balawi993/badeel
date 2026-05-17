@@ -11,6 +11,16 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Initialize PostgreSQL Connection Pool using Neon DATABASE_URL
+if (!process.env.DATABASE_URL) {
+    console.error("\n========================================================");
+    console.error("CRITICAL CONFIGURATION ERROR:");
+    console.error("DATABASE_URL environment variable is missing!");
+    console.error("Please add the DATABASE_URL variable in your Railway dashboard settings");
+    console.error("with your Neon PostgreSQL connection string.");
+    console.error("========================================================\n");
+    process.exit(1);
+}
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
