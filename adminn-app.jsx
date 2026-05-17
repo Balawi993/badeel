@@ -1,3 +1,9 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import { Button, Badge } from './components/UI';
+import { trickleListObjects, trickleDeleteObject } from './lib/api-client';
+import './index.css';
+
 class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
@@ -33,8 +39,8 @@ class ErrorBoundary extends React.Component {
 }
 
 function AdminLogin({ onLogin }) {
-    const [pin, setPin] = React.useState('');
-    const [error, setError] = React.useState('');
+    const [pin, setPin] = useState('');
+    const [error, setError] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -88,7 +94,7 @@ function AdminLogin({ onLogin }) {
                         إلغاء القفل والدخول
                     </Button>
                 </form>
-                <a href="index.html" className="inline-block text-xs text-white/40 hover:text-white/60 transition-colors">
+                <a href="/" className="inline-block text-xs text-white/40 hover:text-white/60 transition-colors">
                     &larr; العودة للمنصة
                 </a>
             </div>
@@ -97,18 +103,18 @@ function AdminLogin({ onLogin }) {
 }
 
 function AdminDashboard() {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(
+    const [isAuthenticated, setIsAuthenticated] = useState(
         sessionStorage.getItem('admin_pin') === '1417'
     );
-    const [requests, setRequests] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [stats, setStats] = React.useState({
+    const [requests, setRequests] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [stats, setStats] = useState({
         total: 0,
         topSpecialty: '-',
         topRegion: '-'
     });
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isAuthenticated) {
             fetchRequests();
         }
@@ -183,7 +189,7 @@ function AdminDashboard() {
                         <p className="text-xs text-gray-500">نظام إدارة طلبات منصة بديلي</p>
                     </div>
                 </div>
-                <a href="index.html" className="text-sm font-medium text-primary hover:underline">العودة للمنصة &larr;</a>
+                <a href="/" className="text-sm font-medium text-primary hover:underline">العودة للمنصة &larr;</a>
             </header>
 
             <main className="max-w-5xl mx-auto px-4 mt-6 space-y-6">

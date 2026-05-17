@@ -1,8 +1,13 @@
-const AddRequestDialog = ({ isOpen, onClose, onSuccess }) => {
-    const [step, setStep] = React.useState(1);
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const [agreed, setAgreed] = React.useState(false);
-    const [formData, setFormData] = React.useState({
+import React, { useState, useEffect } from 'react';
+import { Modal, Button } from './UI';
+import { SPECIALTIES, SPECIALTY_ICONS, REGIONS } from '../lib/constants';
+import { trickleCreateObject } from '../lib/api-client';
+
+export const AddRequestDialog = ({ isOpen, onClose, onSuccess }) => {
+    const [step, setStep] = useState(1);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [agreed, setAgreed] = useState(false);
+    const [formData, setFormData] = useState({
         specialty: '',
         current_region: '',
         hospital_name: '',
@@ -11,7 +16,7 @@ const AddRequestDialog = ({ isOpen, onClose, onSuccess }) => {
     });
 
     // Reset when opened
-    React.useEffect(() => {
+    useEffect(() => {
         if (isOpen) {
             setStep(1);
             setAgreed(false);

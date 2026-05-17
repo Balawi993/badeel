@@ -1,4 +1,7 @@
-const AppHeader = ({ hasRequest, onAddClick, onDeleteClick }) => {
+import React from 'react';
+import { Button } from './UI';
+
+export const AppHeader = ({ hasRequest, onAddClick, onDeleteClick }) => {
     return (
         <header className="sticky top-0 z-40 w-full bg-white border-b border-gray-100 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">

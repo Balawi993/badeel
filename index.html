@@ -11,88 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
-
-    <style type="text/tailwindcss">
-    @layer theme {
-        :root {
-            --primary: 153 75% 22%; /* Darker professional green */
-            --bg-color: #f4f6f5;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border-color: #e5e7eb;
-            --danger: 0 84% 60%;
-        }
-    }
-
-    @layer base {
-        body {
-            font-family: 'IBM Plex Sans Arabic', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Custom thin green scrollbar */
-        ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(37, 147, 98, 0.3);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(37, 147, 98, 0.7);
-        }
-    }
-
-    @layer utilities {
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    }
-    </style>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: 'hsl(var(--primary))',
-                        danger: 'hsl(var(--danger))',
-                    },
-                    boxShadow: {
-                        'ios': '0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)',
-                        'ios-lg': '0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white pb-safe">
     <div id="root"></div>
 
-    <script src="lib/api-client.js"></script>
-    <script type="text/babel" src="lib/constants.js"></script>
-    <script type="text/babel" src="components/UI.js"></script>
-    <script type="text/babel" src="components/AddRequestDialog.js"></script>
-    <script type="text/babel" src="components/RequestCard.js"></script>
-    <script type="text/babel" src="components/FilterBar.js"></script>
-    <script type="text/babel" src="components/AppHeader.js"></script>
-    <script type="text/babel" src="app.js"></script>
+    <script type="module" src="/app.jsx"></script>
 </body>
 </html>

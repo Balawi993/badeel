@@ -1,3 +1,13 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import { Button } from './components/UI';
+import { AppHeader } from './components/AppHeader';
+import { FilterBar } from './components/FilterBar';
+import { RequestCard } from './components/RequestCard';
+import { AddRequestDialog } from './components/AddRequestDialog';
+import { trickleListObjects, trickleDeleteObject } from './lib/api-client';
+import './index.css';
+
 class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
@@ -34,21 +44,21 @@ class ErrorBoundary extends React.Component {
 }
 
 function App() {
-    const [requests, setRequests] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [hasMyRequest, setHasMyRequest] = React.useState(false);
-    const [myRequestId, setMyRequestId] = React.useState(null);
-    const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
+    const [requests, setRequests] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasMyRequest, setHasMyRequest] = useState(false);
+    const [myRequestId, setMyRequestId] = useState(null);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     
     // Filters state
-    const [filters, setFilters] = React.useState({
+    const [filters, setFilters] = useState({
         specialty: '',
         currentRegion: '',
         desiredRegion: ''
     });
 
     // Check localStorage on mount
-    React.useEffect(() => {
+    useEffect(() => {
         const storedId = localStorage.getItem('badeeli_request_id');
         if (storedId) {
             setHasMyRequest(true);
@@ -70,7 +80,7 @@ function App() {
     };
 
     const handleDeleteMyRequest = async () => {
-        if (!confirm('هل أنت متأكد من رغبتك في حذف طلبك؟')) return;
+        if (!confirm('هل أنت متأكب من رغبتك في حذف طلبك؟')) return;
         
         try {
             if (myRequestId) {
@@ -112,7 +122,7 @@ function App() {
     });
 
     return (
-        <div className="min-h-screen bg-var(--bg-color)">
+        <div className="min-h-screen bg-[var(--bg-color)]">
             <AppHeader 
                 hasRequest={hasMyRequest}
                 onAddClick={() => setIsAddModalOpen(true)}
@@ -122,7 +132,7 @@ function App() {
             <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 md:py-6">
                 
                 {/* Fixed Filter Bar Area */}
-                <div className="sticky top-14 md:top-16 z-30 bg-var(--bg-color) pt-1 pb-3 md:pb-6">
+                <div className="sticky top-14 md:top-16 z-30 bg-[var(--bg-color)] pt-1 pb-3 md:pb-6">
                     <FilterBar filters={filters} setFilters={setFilters} />
                 </div>
 

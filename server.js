@@ -3,9 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 const path = require('path');
+const compression = require('compression');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Enable Gzip compression to reduce network bandwidth significantly
+app.use(compression());
 
 // Express Body Parser middleware
 app.use(express.json());
@@ -152,17 +156,17 @@ app.delete('/api/requests/:id', async (req, res) => {
 
 // --- Static Serving & SPA Support ---
 
-// Serve static frontend assets
-app.use(express.static(__dirname));
+// Serve static frontend assets from the compiled Vite output directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Route mapping for clean URLs in local & production
 app.get('/adminn', (req, res) => {
-    res.sendFile(path.join(__dirname, 'adminn.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'adminn.html'));
 });
 
-// SPA catch-all routing fallback (serves index.html for undefined routes)
+// SPA catch-all routing fallback (serves built index.html for undefined routes)
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Start monolithic server

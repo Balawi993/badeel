@@ -1,4 +1,8 @@
-const RequestCard = ({ request }) => {
+import React from 'react';
+import { Button, Badge } from './UI';
+import { SPECIALTY_ICONS, getRelativeTime } from '../lib/constants';
+
+export const RequestCard = ({ request }) => {
     const handleWhatsApp = () => {
         const phone = request.objectData.phone.replace(/[^0-9]/g, '');
         window.open(`https://wa.me/${phone}`, '_blank');

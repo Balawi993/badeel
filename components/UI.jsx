@@ -1,4 +1,6 @@
-const Button = ({ children, variant = 'primary', size = 'md', className = '', ...props }) => {
+import React from 'react';
+
+export const Button = ({ children, variant = 'primary', size = 'md', className = '', ...props }) => {
     const baseStyle = "inline-flex items-center justify-center font-medium transition-colors focus:outline-none rounded-xl active:scale-[0.98]";
     
     const variants = {
@@ -25,7 +27,7 @@ const Button = ({ children, variant = 'primary', size = 'md', className = '', ..
     );
 };
 
-const Modal = ({ isOpen, onClose, title, children }) => {
+export const Modal = ({ isOpen, onClose, title, children }) => {
     if (!isOpen) return null;
 
     return (
@@ -56,7 +58,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     );
 };
 
-const Badge = ({ children, className = '', variant = 'default' }) => {
+export const Badge = ({ children, className = '', variant = 'default' }) => {
     const variants = {
         default: "bg-gray-100 text-gray-700",
         primary: "bg-primary/10 text-primary",

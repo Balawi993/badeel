@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer theme {
+    :root {
+        --primary: 153 75% 22%; /* Darker professional green */
+        --bg-color: #f4f6f5;
+        --card-bg: #ffffff;
+        --text-main: #1f2937;
+        --text-muted: #6b7280;
+        --border-color: #e5e7eb;
+        --danger: 0 84% 60%;
+    }
+}
+
+@layer base {
+    body {
+        font-family: 'IBM Plex Sans Arabic', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Custom thin green scrollbar */
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(37, 147, 98, 0.3);
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(37, 147, 98, 0.7);
+    }
+}
+
+@layer utilities {
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}

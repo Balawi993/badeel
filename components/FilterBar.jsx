@@ -1,4 +1,7 @@
-const FilterBar = ({ filters, setFilters }) => {
+import React from 'react';
+import { SPECIALTIES, SPECIALTY_ICONS, REGIONS } from '../lib/constants';
+
+export const FilterBar = ({ filters, setFilters }) => {
     return (
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4 mb-2 bg-white p-2.5 md:p-3.5 md:px-5 rounded-2xl shadow-ios border border-gray-100">
             {/* Specialties Chips (Horizontal Scroll) */}
