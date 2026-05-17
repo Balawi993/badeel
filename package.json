@@ -1,0 +1,18 @@
+{
+  "name": "badeeli-spa",
+  "version": "1.0.0",
+  "description": "منصة بديلي للتبادل الوظيفي للفنيين الصحيين بالمملكة العربية السعودية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
